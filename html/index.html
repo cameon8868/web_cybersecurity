@@ -16,15 +16,15 @@
       <h1>Hello, cybersecurity specialist!</h1>
     </header>
     <main>
-      <form class="form" id="MyForm">
+      <form action="/Form" method="post" class="form" id="MyForm">
         <div class="form__filed">
           <label class="form__label" for="login">Login</label>
-          <input class="form__input" type ="text" id="login" name="login"/>
+          <input class="form__input" type ="text" id="login" name="login" required/>
         </div>
 
         <div>
           <label class="form__label" for="password">Password</label>
-          <input class="form__input" type="password" id="password" name="password"/>
+          <input class="form__input" type="password" id="password" name="password" required/>
         </div>
       
         <button class="form__button">Registration</button>
