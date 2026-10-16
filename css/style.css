@@ -1,0 +1,71 @@
+/* ===============================
+   Переменные
+   =============================== */
+:root{
+    --space: 20px;
+}
+
+/* ===============================
+   Стили шапки
+   =============================== */
+
+* {
+  box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    padding: 24px 0;
+    background-color: rgb(72, 72, 72);
+    top: 0;
+    position: sticky;
+
+
+}
+
+body {
+    background-color: darkgray;
+}
+
+h1 {
+    color:rgb(88, 104, 72);
+}
+
+/* ===============================
+   Стили формы
+   =============================== */
+
+
+.form{
+    font-size: var(--space);
+}
+
+.form_filed {
+    font-size: var(--space);
+}
+
+.form__label {
+    font-size: var(--space);
+    display: flex;
+    flex-direction: column;
+}
+
+.form__input {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__button {
+    font-size: var(--space);
+    margin-top: 10px;
+}
+
+.message {
+    display: none;
+    font-size: var(--space);
+}
+
+.message--visible{
+    display: block;
+    font-size: var(--space);
+}
