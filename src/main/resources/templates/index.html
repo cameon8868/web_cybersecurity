@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RootPath</title>
-  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" th:href="@{/style.css}">
   <meta property="og:type" content="website">
 </head>
 
@@ -13,7 +13,7 @@
       <h1>Hello, cybersecurity specialist!</h1>
     </header>
     <main>
-      <form action="/general.html" method="post" class="form" id="MyForm">
+      <form action="/login" method="post" class="form" id="MyForm">
         <div class="form__filed">
           <label class="form__label" for="login">Login</label>
           <input class="form__input" type ="text" id="login" name="login" required/>
