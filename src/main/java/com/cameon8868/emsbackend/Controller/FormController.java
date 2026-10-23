@@ -1,18 +1,30 @@
 package com.cameon8868.emsbackend.Controller;
 
+import com.cameon8868.emsbackend.database.User;
+import com.cameon8868.emsbackend.database.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+
 @Controller
 public class FormController {
 
-    @PostMapping("/login")
+    private final UserRepository repository;
 
+    public FormController(UserRepository repository) {
+        this.repository = repository;
+    }
+
+    @PostMapping("/login")
     public String handleForm(@RequestParam String login, @RequestParam String password) {
-        System.out.println("Login: " + login + ", Password: " + password);
-        
-        // redirect нужен для того чтобы после отправки формы не оставаться на странице index.html, а перейти на страницу general.html
-        return "redirect:/general"; 
+        Optional<User> user = repository.findByLogin(login);
+
+        if (user.isEmpty() || !user.get().getPassword().equals(password)) {
+            return "redirect:/index?error";
+
+        }
+        return "redirect:/general";
     }
 }
