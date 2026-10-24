@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,7 @@
       <h1>Web-Cybersecurity</h1>
     </header>
     <main>
-
+      <h1>Welcome, <span th:text="${username}"></span>!</h1>
     </main>
-    <p id="message" class="message">Form submitted successfully!</p>
 </body>
 </html>
