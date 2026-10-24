@@ -1,20 +1,21 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Главная</title>
-  <link rel="stylesheet" th:href="@{/style.css}">
-  <meta property="og:type" content="website">
-</head>
+  <!DOCTYPE html>
 
-<body>
-    <header>
-      <h1>Web-Cybersecurity</h1>
-    </header>
-    <main>
+  <html lang="ru" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <meta property="og:type" content="website">
+  </head>
 
-    </main>
-    <p id="message" class="message">Form submitted successfully!</p>
-</body>
-</html>
+  <body>
+      <header>
+        <h1>Web-Cybersecurity</h1>
+      </header>
+      <main>
+          <h1>Hi, <span th:text="${username}">Пользователь</span>!</h1>
+      </main>
+
+  </body>
+  </html>

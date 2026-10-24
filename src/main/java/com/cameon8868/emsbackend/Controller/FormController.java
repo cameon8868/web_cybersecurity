@@ -25,6 +25,8 @@ public class FormController {
             return "redirect:/index?error";
 
         }
-        return "redirect:/general";
+        return "redirect:/general?username=" + login;
     }
+
+
 }
