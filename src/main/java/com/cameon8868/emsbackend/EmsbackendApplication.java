@@ -9,5 +9,4 @@ public class EmsbackendApplication {
         SpringApplication.run(EmsbackendApplication.class, args);
         System.out.println("http://localhost:8080");
     }
-
 }

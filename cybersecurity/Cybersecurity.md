@@ -12,7 +12,7 @@
 
 2. [SQL-инъекция (CWE-089)](#2-sql-инъекция-cwe-089)
 
----
+3. [Отсутствие аутентификации для критичной функции (CWE-306) и Обход авторизации через управляемый пользователем ключ (CWE-639)](#3-отсутствие-аутентификации-для-критичной-функции-cwe-306-и-обход-авторизации-через-управляемый-пользователем-ключ-cwe-639)
 
 ---
 
@@ -42,7 +42,7 @@
 
 **Воспроизведение:**
 
-1. Жертва вводит свои данные на сайте (Пример: login: qwerty, password: 1234). 
+1. Открываем Wireshark. Жертва вводит свои данные на сайте (Пример: login: qwerty, password: 1234). 
 
 ![alt text](img/wireshark/wireshark_test.jpg)
 
@@ -90,7 +90,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 }
 ```
 
-А также стоит вводить белые списки на использование таких символов, как: `';=-`
+А также стоит вводить черный список на использование таких символов, как дополнительный слой защиты: `';=-`
 
 **Проверка:** Попробуем повторить воспроизведение:
 
@@ -102,6 +102,104 @@ public interface UserRepository extends JpaRepository<User, Long> {
 ![alt text](img/089/089_login3.png)
 ![alt text](img/089/089_resultsTrue.png)
 
-**Вывод:** От SQL-инъекций легко защититься, но вред, который они несут, огромен, вплоть до потери базы данных. Для защиты достаточно использовать параметризованные запросы вместо конкатенации строк, а также вводить белые списки на определённые символы. Существуют два вида проявления уязвимости — blind и in-band, разница между ними в том, виден ли результат запроса атакующему напрямую.
+**Вывод:** От SQL-инъекций легко защититься, но вред, который они несут, огромен, вплоть до потери базы данных. Для защиты достаточно использовать параметризованные запросы вместо конкатенации строк, а также вводить черные списки на определённые символы. Существуют два вида проявления уязвимости — blind и in-band, разница между ними в том, виден ли результат запроса атакующему напрямую.
+
+
+---
+
+### 3. Отсутствие аутентификации для критичной функции (CWE-306) и Обход авторизации через управляемый пользователем ключ (CWE-639)
+
+**Среда:** локальный стенд, тестовые данные
+
+**Уязвимость:** 
+- **CWE-306:** страница `/general` не проверяет, выполнен ли вход. Любой посетитель без сессии получает данные.
+- **CWE-639:** после входа сервер не запоминает пользователя, а передаёт его ник в ссылке, и страница доверяет этому параметру:
+
+```java
+return "redirect:/general?username=" + user.get().getLogin();
+```
+
+Поэтому даже авторизованный пользователь может подставить чужой ник и открыть чужой профиль.
+
+**Воспроизведение:**
+
+1.  **CWE-306.** Переходим по прямой ссылке `/general?username=Cameon`.
+2. **CWE-639.**  Входим как Cameon, затем в ссылке меняем ник на Yana:
+
+![Доступ к профилю Cameon без входа](img/306_639/306_login.png)
+
+3. Также попробуем перейти в профиль Yana:
+
+![Профиль Yana открыт под сессией Cameon](img/306_639/639_loginYana.png)
+
+**Результат:** сервер отдал страницу без входа и без проверки прав на чужой профиль. Ошибка 403 не возвращается.
+
+**Исправление:** 
+
+1.  `FormController`: сохраняем в сессии только логин
+
+```java       
+        // сбрасываем старую сессию, если она есть, и создаем новую
+        HttpSession old = request.getSession(false);
+        if (old != null) {
+            old.invalidate();                      // защита от session fixation
+        }
+        HttpSession session = request.getSession(true);
+        session.setAttribute("userLogin", user.get().getLogin());
+
+        return "redirect:/general";
+```
+
+2. `AuthInterceptor`: закрывает страницу без входа (CWE-306)
+
+```java
+        @Override
+        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+            HttpSession session = request.getSession(false);
+            if (session == null || session.getAttribute("userLogin") == null) {
+                response.sendRedirect("/index");
+                return false;
+            }
+            return true;
+        }
+```
+
+3. `WebConfig`: подключение
+
+```java
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    private final AuthInterceptor authInterceptor;
+
+    public WebConfig(AuthInterceptor authInterceptor) {
+        this.authInterceptor = authInterceptor;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(authInterceptor).addPathPatterns("/general", "/general/**");
+        //сюда будут добавляться все защищенные страницы, которые требуют авторизации
+    }
+    
+}
+```
+
+4. `MainController`: ник берётся из сессии, а не из ссылки (CWE-639)
+
+```java
+@GetMapping("/general")
+public String general(HttpSession session, Model model) {
+    String login = (String) session.getAttribute("userLogin");
+    model.addAttribute("username", login);
+    return "general";
+}
+```
+ 
+**Проверка:** Теперь ник берётся из серверной сессии, что закрывает уязвимость CWE-639 и нельзя перейти по ссылке обойдя авторизацию, что закрывает уязвимость CWE-306
+
+![alt text](img/306_639/306_639Results.png)
+
+**Вывод:** Защита этих уязвимостей крайне важна, так как без нее теряется смысл добавления авторизации на сайте. 
 
 ---
