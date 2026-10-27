@@ -11,7 +11,7 @@
 - [Конфигурация](#конфигурация)
 - [Разбор уязвимостей на примере этого сайта](#разбор-уязвимостей-на-примере-этого-сайта)
 
-## Технологии
+## Используемые технологии
 
 <p align="left">
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
