@@ -1,8 +1,8 @@
-# 🔍 web_cybersecurity
+# web_cybersecurity
 
 Хранение и быстрый поиск шпаргалок по инструментам и приёмам [кибербезопасности](cybersecurity/Cybersecurity.md), ведение разборов (writeups) решённых CTF-задач и лаб, самопроверка знаний.
 
-## 🔨 Технологии
+## Технологии
 
 <p align="left">
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
@@ -20,7 +20,7 @@
   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
 </p>
 
-## Содержание
+## 📋 Содержание
 
 - [Используемые технологии](#используемые-технологии)
 - [Использование Spring Boot 4.1.1](#использование-spring-boot-411)
