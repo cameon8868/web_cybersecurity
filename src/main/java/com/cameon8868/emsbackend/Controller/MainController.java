@@ -10,8 +10,8 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
 
     @GetMapping("/")
-    public String index() {
-        return "index";
+    public String LogIn() {
+        return "LogIn";
     }
 
     @GetMapping("/general")

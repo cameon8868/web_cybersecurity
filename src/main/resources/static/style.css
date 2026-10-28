@@ -1,8 +1,27 @@
 /* ===============================
    Переменные
    =============================== */
-:root{
+:root {
     --space: 20px;
+
+    /* Фоны (от самого тёмного к более светлому) */
+    --bg: #0f1115;          /* фон страницы */
+    --header-bg: #161a20;   /* шапка */
+    --surface: #1b2028;     /* карточки, поля ввода */
+
+    /* Линии */
+    --border: #2b323d;
+
+    /* Текст */
+    --text: #e8eaee;        /* основной */
+    --text-muted: #9aa3b2;  /* подписи, второстепенный */
+
+    /* Акцент */
+    --accent: #4f8cff;
+    --accent-hover: #6fa0ff;
+
+    /* Ошибка */
+    --error: #ff6b6b;
 }
 
 /* ===============================
@@ -16,7 +35,7 @@
 header {
     width: 100%;
     padding: 24px 0;
-    background-color: rgb(72, 72, 72);
+    background-color: var(--header-bg);
     top: 0;
     position: sticky;
 
@@ -24,23 +43,33 @@ header {
 }
 
 body {
-    background-color: darkgray;
+    background-color: var(--bg);
 }
 
 h1 {
-    color:rgb(88, 104, 72);
+    color: var(--text);
 }
 
 /* ===============================
    Стили формы
    =============================== */
 
+.main__logIn{
+    color: var(--text-muted);
+    display: grid;
+    place-items: center auto;
+    min-width: 100%;
+    padding: 40px 40px;
+}
 
 .form{
+    padding: 40px;
+    max-width: 100%;
+    margin: 0 auto;
     font-size: var(--space);
 }
 
-.form_filed {
+.form__filed {
     font-size: var(--space);
 }
 
@@ -53,11 +82,37 @@ h1 {
 .form__input {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    color: var(--text);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
 }
 
 .form__button {
+    background-color: var(--accent);
+    color: var(--text);
     font-size: var(--space);
     margin-top: 10px;
+}
+
+.form__footer {
+    margin: 20px 0 0;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.form__link {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.form__link:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
 }
 
 .message {

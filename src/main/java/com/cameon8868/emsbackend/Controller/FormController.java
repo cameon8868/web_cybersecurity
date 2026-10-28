@@ -26,7 +26,7 @@ public class FormController {
         Optional<User> user = repository.findByLogin(login);
 
         if (user.isEmpty() || !user.get().getPassword().equals(password)) {
-            return "redirect:/index?error";
+            return "redirect:/LogIn";
 
         }
 
