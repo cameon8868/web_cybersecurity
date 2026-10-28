@@ -2,7 +2,7 @@
 
 Хранение и быстрый поиск шпаргалок по инструментам и приёмам [кибербезопасности](cybersecurity/Cybersecurity.md), ведение разборов (writeups) решённых CTF-задач и лаб, самопроверка знаний.
 
-## Содержание
+## 📋 Содержание
 
 - [Используемые технологии](#используемые-технологии)
 - [Использование Spring Boot 4.1.1](#использование-spring-boot-411)
@@ -13,19 +13,22 @@
 
 ## Используемые технологии
 
-- HTML;
-- CSS;
-- Java 21;
-- Spring Boot 4.1.1;
-- Spring Web MVC;
-- Spring Data JPA;
-- Thymeleaf;
-- PostgreSQL;
-- springboot4-dotenv;
-- Maven (wrapper);
-- Lombok;
-- Git;
-- GitHub.
+<p align="left">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
+  <img src="https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21">
+  <img src="https://img.shields.io/badge/Spring_Boot_4.1.1-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot">
+  <img src="https://img.shields.io/badge/Spring_Web_MVC-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Web MVC">
+  <img src="https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Data JPA">
+  <img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white" alt="Thymeleaf">
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/springboot4--dotenv-ECD53F?style=for-the-badge&logo=dotenv&logoColor=black" alt="dotenv">
+  <img src="https://img.shields.io/badge/Maven_Wrapper-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white" alt="Maven">
+  <img src="https://img.shields.io/badge/Lombok-BC4521?style=for-the-badge" alt="Lombok">
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git">
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+</p>
 
 ## Использование Spring Boot 4.1.1
 
@@ -83,3 +86,4 @@ DB_PASSWORD=change_me
 В этом разделе разобраны уязвимости, которые были в предыдущих версиях сайта: для каждой показано, в чём она заключалась, и в конце пункта описано, как она была исправлена.
 
 Подробно про них рассказано [здесь](cybersecurity/Cybersecurity.md).
+Все кодировки CWE берутся [отсюда](https://cwe.mitre.org/data/downloads.html).
