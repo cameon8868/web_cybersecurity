@@ -6,6 +6,7 @@ import com.cameon8868.emsbackend.database.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,17 +17,19 @@ import java.util.Optional;
 public class FormController {
 
     private final UserRepository repository;
+    private final PasswordEncoder encoder;
 
-    public FormController(UserRepository repository) {
+    public FormController(UserRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
+        this.encoder = encoder;
     }
 
     @PostMapping("/login")
     public String handleForm(@RequestParam String login, @RequestParam String password, HttpServletRequest request) {
         Optional<User> user = repository.findByLogin(login);
 
-        if (user.isEmpty() || !user.get().getPassword().equals(password)) {
-            return "redirect:/LogIn";
+        if (user.isEmpty() || !encoder.matches(password, user.get().getPassword())) {
+            return "redirect:/";
 
         }
 

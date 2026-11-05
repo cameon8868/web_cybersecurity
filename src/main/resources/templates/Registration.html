@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,27 +14,30 @@
   </header>
 
   <main class="main__logIn">
-    <form action="/login" method="post" class="form" id="MyForm">
+    <form action="/register" th:action="@{/register}" method="post" class="form" id="MyForm">
       <h2 class="form__title">Hello, cybersecurity specialist!</h2>
 
-      <div class="form__filed">
+      <p th:if="${error}" th:text="${error}" class="form__error"></p>
+
+      <div class="form__field">
         <label class="form__label" for="login">Login</label>
         <input class="form__input" type="text" id="login" name="login"
-               autocomplete="username" required>
+               autocomplete="username" minlength="3" required>
       </div>
 
       <div class="form__field">
         <label class="form__label" for="password">Password</label>
         <input class="form__input" type="password" id="password" name="password"
-               autocomplete="current-password" required>
+               autocomplete="new-password" minlength="8" required>
       </div>
 
       <button class="form__button" type="submit">Registration</button>
+
       <p class="form__footer">
         Already have an account?
-      <a class="form__link" href="LogIn.html" th:href="@{/register}">Log in</a>
+        <a class="form__link" href="/" th:href="@{/}">Log in</a>
+      </p>
     </form>
-
   </main>
 </body>
 </html>
